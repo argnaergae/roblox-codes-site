@@ -1,1 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Roblox Codes Hub</title>
+</head>
+<body>
 
+<h1>Roblox Codes Hub</h1>
+
+<select id="gameSelect">
+  <option value="BloxFruits">BloxFruits</option>
+  <option value="AnimeAdventures">AnimeAdventures</option>
+</select>
+
+<button onclick="loadCodes()">Get Codes</button>
+
+<div id="codes"></div>
+
+<script>
+function loadCodes() {
+  const game = document.getElementById("gameSelect").value;
+
+  fetch("/api/codes/" + game)
+    .then(res => res.json())
+    .then(data => {
+      let html = "";
+      data.forEach(code => {
+        html += "<p><b>" + code.code + "</b></p>";
+      });
+      document.getElementById("codes").innerHTML = html;
+    });
+}
+</script>
+
+</body>
+</html>
