@@ -19,3 +19,11 @@ with open("codes.json", "w") as f:
     json.dump(codes, f, indent=2)
 
 print("Updated codes.")
+import schedule
+import time
+
+schedule.every(30).minutes.do(scrape_function)
+
+while True:
+    schedule.run_pending()
+    time.sleep(1)
